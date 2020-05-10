@@ -109,8 +109,8 @@ class PolyEncryption:
       x0 = struct.unpack('q', fin.read(8))
       epsilon = struct.unpack('d', fin.read(8))
       max_iter = struct.unpack('Q', fin.read(8))
-      s = "".join([chr(int(round(self.polynomial(root[0])))) for root in struct.iter_unpack('d', fin.read())])
-      with open(filename + ".dec", "w") as fout:
+      s = bytes(int(round(self.polynomial(root[0]))) for root in struct.iter_unpack('d', fin.read()))
+      with open(filename + ".dec", "wb") as fout:
         fout.write(s)
 
 
